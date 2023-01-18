@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
-using WebApi_Minimal_EF_Dapper.Business;
+﻿using WebApi_Minimal_EF_Dapper.Business;
 
 namespace WebApi_Minimal_EF_Dapper.Endpoints.Products
 {

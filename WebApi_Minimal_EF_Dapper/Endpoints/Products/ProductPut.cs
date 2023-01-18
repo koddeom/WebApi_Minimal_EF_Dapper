@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebApi_Minimal_EF_Dapper.AppDomain.Extensions.ErroDetailedExtension;
 using WebApi_Minimal_EF_Dapper.Domain.Database;
 using WebApi_Minimal_EF_Dapper.Endpoints.Products.DTO;

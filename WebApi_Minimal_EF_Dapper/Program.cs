@@ -16,7 +16,10 @@ var builder = WebApplication.CreateBuilder(args);
 //==================================================================================================
 
 //Adicionando o serviço do Swagger
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); // Resolve conflito de nomes de endpoits no swagger
+});
 
 //--------------------------------------------------------------------------------------------------
 //Log de aplicaçõa com SeriLog
@@ -82,6 +85,8 @@ app.MapMethods(ProductPut.Template, ProductPut.Methods, ProductPut.Handle);
 
 app.MapMethods(ProductDelete.Template, ProductDelete.Methods, ProductDelete.Handle);
 
+app.MapMethods(ProductSoldGet.Template, ProductSoldGet.Methods, ProductSoldGet.Handle);
+
 // Categorie Endpoints-------------------------------------------------------------------------------
 
 app.MapMethods(CategoryGetAll.Template, CategoryGetAll.Methods, CategoryGetAll.Handle);
@@ -120,5 +125,4 @@ app.Map("/error", (HttpContext http) =>
     return Results.Problem(title: "An error ocurred", statusCode: 500);
 });
 
-
-app.Run();
+app.Run();//<============ RUN

@@ -1,13 +1,11 @@
 ﻿using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.Intrinsics.X86;
 using WebApi_Minimal_EF_Dapper.Domain.Database.Entities.Product;
 
 namespace WebApi_Minimal_EF_Dapper.Domain.Database
 {
     public class ApplicationDbContext : DbContext
     {
-
         //------------------------------------------------------------------------
         //TABELAS MAPEADAS
         //------------------------------------------------------------------------
@@ -29,7 +27,6 @@ namespace WebApi_Minimal_EF_Dapper.Domain.Database
             //The entity type 'Notification' requires a primary key to be defined.
             //If you intended to use a keyless entity type, call 'HasNoKey' in 'OnModelCreating'
             builder.Ignore<Notification>();
-
 
             //Define configuracoes individuais que serão aplicadas pelo EF
 
@@ -62,7 +59,6 @@ namespace WebApi_Minimal_EF_Dapper.Domain.Database
 
             builder.Entity<Product>()
                    .Property(p => p.EditedOn).IsRequired(false);
-
 
             //------------------------------------------------------------------------------------------------
             //TABELA CATEGORIA

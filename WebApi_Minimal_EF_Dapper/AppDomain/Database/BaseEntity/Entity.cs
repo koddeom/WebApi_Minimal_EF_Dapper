@@ -5,7 +5,7 @@ namespace WebApi_Minimal_EF_Dapper.Domain.Database.BaseEntity
     public abstract class Entity : Notifiable<Notification>
     {
         //------------------------------------------------------------------------------------------------------
-        // CLASSE PRINCIPAL DAS ENTIDADES DO BANCO
+        // CLASSE PRINCIPAL ABSTRATA QUE SERA HERDADA POR TODAS AS ENTIDADES DO BANCO
         // EH HERDADA POR TODAS AS ENTITIDADES DE BANCO (TABELAS)
         // - Agrega o Notifiable do Flunt para que todas as entidades possam usar notification
         // - Agrega a criação de um Id Guid que será usando pelo EF na criação de novas entidades no banco

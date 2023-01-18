@@ -15,8 +15,8 @@ namespace WebApi_Minimal_EF_Dapper.Domain.Database.Entities.Product
                 .IsNotNullOrEmpty(Name, "Name", "Nome é obrigatório")
                 .IsGreaterOrEqualsThan(Name, 3, "Name");
 
-                //.IsNotNullOrEmpty(CreatedBy, "CreatedBy", "O usuario criador é obrigatório")
-                //.IsNotNullOrEmpty(EditedBy, "EditedBy", "O usuario alterador é obrigatório");
+            //.IsNotNullOrEmpty(CreatedBy, "CreatedBy", "O usuario criador é obrigatório")
+            //.IsNotNullOrEmpty(EditedBy, "EditedBy", "O usuario alterador é obrigatório");
 
             AddNotifications(contract);
         }

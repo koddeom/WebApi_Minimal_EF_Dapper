@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Swashbuckle.AspNetCore.Annotations;
+﻿using Microsoft.EntityFrameworkCore;
 using WebApi_Minimal_EF_Dapper.Domain.Database;
 using WebApi_Minimal_EF_Dapper.Endpoints.Products.DTO;
 

@@ -15,22 +15,22 @@ namespace WebApi_Minimal_EF_Dapper.Endpoints.Categories
         //Observacao: IResult está trabalhando com uma operacao sincrona
 
         public static IResult Action([FromRoute] Guid id,
-                                                 CategoryRequestDTO categoryRequest,
+                                                 CategoryRequestDTO categoryRequestDTO,
                                                  HttpContext http,
-                                                 ApplicationDbContext context)
+                                                 ApplicationDbContext dbContext)
         {
             //Usuario fixo, mas  poderia vir de um identity
             string user = "doe joe";
 
-            var category = context.Categories.FirstOrDefault(c => c.Id == id);
+            var category = dbContext.Categories.FirstOrDefault(c => c.Id == id);
 
             if (category == null)
             {
                 return Results.NotFound();
             }
 
-            category.EditInfo(categoryRequest.Name,
-                              categoryRequest.Active,
+            category.EditInfo(categoryRequestDTO.Name,
+                              categoryRequestDTO.Active,
                               user);
 
             if (!category.IsValid)
@@ -39,7 +39,7 @@ namespace WebApi_Minimal_EF_Dapper.Endpoints.Categories
                                                          .ConvertToErrorDetails());
             }
 
-            context.SaveChanges();
+            dbContext.SaveChanges();
 
             return Results.Ok();
         }

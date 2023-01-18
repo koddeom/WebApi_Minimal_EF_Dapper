@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 using WebApi_Minimal_EF_Dapper.Domain.Database;
 
 namespace WebApi_Minimal_EF_Dapper.Endpoints.Products

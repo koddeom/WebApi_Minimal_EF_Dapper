@@ -16,7 +16,7 @@ namespace WebApi_Minimal_EF_Dapper.Endpoints.Categories
 
         public static async Task<IResult> Action(CategoryRequestDTO categoryRequestDTO,
                                                  HttpContext http,
-                                                 ApplicationDbContext context)
+                                                 ApplicationDbContext dbContext)
         {
             //Usuario fixo, mas  poderia vir de um identity
             string user = "doe joe";
@@ -31,8 +31,8 @@ namespace WebApi_Minimal_EF_Dapper.Endpoints.Categories
                 return Results.ValidationProblem(category.Notifications.ConvertToErrorDetails());
             }
 
-            await context.Categories.AddAsync(category);
-            context.SaveChanges();
+            await dbContext.Categories.AddAsync(category);
+            dbContext.SaveChanges();
 
             return Results.Created($"/categories/{category.Id}", category.Id);
         }
