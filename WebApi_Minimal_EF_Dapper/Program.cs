@@ -2,12 +2,14 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Data.SqlClient;
 using Serilog;
 using Serilog.Sinks.MSSqlServer;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Text.Json;
 using WebApi_Minimal_EF_Dapper.Business;
 using WebApi_Minimal_EF_Dapper.Domain.Database;
-using WebApi_Minimal_EF_Dapper.Endpoints.Categories;
-using WebApi_Minimal_EF_Dapper.Endpoints.Orders;
-using WebApi_Minimal_EF_Dapper.Endpoints.Products;
+using WebApi_Minimal_EF_Dapper.Endpoints.Segmented.Categories;
+using WebApi_Minimal_EF_Dapper.Endpoints.Segmented.Orders;
+using WebApi_Minimal_EF_Dapper.Endpoints.Segmented.Products;
+using WebApi_Minimal_EF_Dapper.Endpoints.Unified;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +18,12 @@ var builder = WebApplication.CreateBuilder(args);
 //==================================================================================================
 
 //Adicionando o serviço do Swagger
+
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); // Resolve conflito de nomes de endpoits no swagger
+    c.EnableAnnotations();
 });
 
 //--------------------------------------------------------------------------------------------------
@@ -64,10 +69,14 @@ app.UseAuthorization();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
-app.UseHttpsRedirection();
+    app.UseSwaggerUI(c =>
+    {
+        c.DocExpansion(DocExpansion.None);//==> mostra os endpoints colapsados
+    });
+
+
+}
 
 //==================================================================================================
 // END POINTS
@@ -104,6 +113,13 @@ app.MapMethods(OrderPost.Template, OrderPost.Methods, OrderPost.Handle);
 app.MapMethods(OrderGet.Template, OrderGet.Methods, OrderGet.Handle);
 
 //-----------------------------------------------------------------
+// Endpoints Unificados
+//-----------------------------------------------------------------
+app.AddProductsEndPoints();
+app.AddCategoryEndPoints();
+app.AddOrderEndPoints();
+
+//-----------------------------------------------------------------
 //filtro de erros
 //-----------------------------------------------------------------
 
@@ -124,5 +140,7 @@ app.Map("/error", (HttpContext http) =>
 
     return Results.Problem(title: "An error ocurred", statusCode: 500);
 });
+
+app.UseHttpsRedirection();
 
 app.Run();//<============ RUN

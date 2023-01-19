@@ -1,4 +1,4 @@
-﻿namespace WebApi_Minimal_EF_Dapper.Endpoints.Categories.DTO
+﻿namespace WebApi_Minimal_EF_Dapper.Endpoints.DTO.Category
 {
     public record CategoryResponseDTO(
      Guid Id,

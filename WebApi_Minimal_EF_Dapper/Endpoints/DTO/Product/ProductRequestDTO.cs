@@ -1,9 +1,9 @@
-﻿namespace WebApi_Minimal_EF_Dapper.Endpoints.Products.DTO
+﻿namespace WebApi_Minimal_EF_Dapper.Endpoints.DTO.Product
 {
     public record ProductRequestDTO(
-        String Name,
+        string Name,
         string Description,
-        Decimal Price,
+        decimal Price,
         bool Active,
         Guid CategoryId
     );

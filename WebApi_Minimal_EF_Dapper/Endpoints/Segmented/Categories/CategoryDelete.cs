@@ -1,28 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using WebApi_Minimal_EF_Dapper.Domain.Database;
 
-namespace WebApi_Minimal_EF_Dapper.Endpoints.Products
+namespace WebApi_Minimal_EF_Dapper.Endpoints.Segmented.Categories
 {
-    public class ProductDelete
+    public class CategoryDelete
     {
-        public static string Template => "/products/{id:guid}";
+        public static string Template => "Category/{id:guid}";
         public static string[] Methods => new string[] { HttpMethod.Delete.ToString() };
         public static Delegate Handle => Action;
 
         //-----------------------------------------------------------------------
-        //Observacao: IResult está trabalhando com uma operacao sincrona
 
+        [SwaggerOperation(Tags = new[] { "Segmented Category" })]
         public static IResult Action([FromRoute] Guid id, ApplicationDbContext dbContext)
         {
             //Recupero o produto do banco
-            var product = dbContext.Products.FirstOrDefault(c => c.Id == id);
+            var category = dbContext.Categories.FirstOrDefault(c => c.Id == id);
 
-            if (product == null)
+            if (category == null)
             {
                 return Results.NotFound();
             }
 
-            dbContext.Products.Remove(product);
+            dbContext.Categories.Remove(category);
             dbContext.SaveChanges();
 
             return Results.Ok();

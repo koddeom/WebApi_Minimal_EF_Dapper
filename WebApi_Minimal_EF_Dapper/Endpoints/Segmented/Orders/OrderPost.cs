@@ -1,19 +1,21 @@
-﻿using WebApi_Minimal_EF_Dapper.AppDomain.Extensions.ErroDetailedExtension;
+﻿using Swashbuckle.AspNetCore.Annotations;
+using WebApi_Minimal_EF_Dapper.AppDomain.Extensions.ErroDetailedExtension;
 using WebApi_Minimal_EF_Dapper.Domain.Database;
 using WebApi_Minimal_EF_Dapper.Domain.Database.Entities.Product;
-using WebApi_Minimal_EF_Dapper.Endpoints.Orders.DTO;
+using WebApi_Minimal_EF_Dapper.Endpoints.DTO.Order;
 
-namespace WebApi_Minimal_EF_Dapper.Endpoints.Orders
+namespace WebApi_Minimal_EF_Dapper.Endpoints.Segmented.Orders
 {
     public class OrderPost
     {
-        public static string Template => "/orders";
+        public static string Template => "Order";
         public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
         public static Delegate Handle => Action;
 
         //----------------------------------------------------------------------
         //Observacao: Task<IResult> Está trabalhando com uma operacao assincrona
-
+        
+        [SwaggerOperation(Tags = new[] { "Segmented Order" })]
         public static async Task<IResult> Action(OrderRequestDTO orderRequestDTO,
                                                  HttpContext http,
                                                  ApplicationDbContext dbContext)
@@ -38,7 +40,7 @@ namespace WebApi_Minimal_EF_Dapper.Endpoints.Orders
 
             var order = new Order();
 
-            order.AddOrder(userId, userName, (orderProducts));
+            order.AddOrder(userId, userName, orderProducts);
 
             if (!order.IsValid)
             {

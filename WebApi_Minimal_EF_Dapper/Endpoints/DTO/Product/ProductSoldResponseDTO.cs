@@ -1,4 +1,4 @@
-﻿namespace WebApi_Minimal_EF_Dapper.Endpoints.Products.DTO
+﻿namespace WebApi_Minimal_EF_Dapper.Endpoints.DTO.Product
 {
     public record ProductSoldResponseDTO(
          Guid Id,
